@@ -1,0 +1,88 @@
+
+import gpdraw.*;
+public class Muller
+{
+    private DrawingTool tool;//creates my pencil tool thing
+    private SketchPad Paper;//my paper that im gonna draw on
+    
+    public Muller()
+    {
+       Paper = new SketchPad(800, 800);// initializes and that
+        tool = new DrawingTool(Paper);
+    }
+
+    public void drawMuller(){
+    tool.up();
+    tool.move(75,100); //it begins
+    tool.down();
+    tool.setDirection(135);
+    tool.forward(10);//my arrow head
+    tool.up();
+    tool.move(75,100);
+    tool.down();
+    tool.setDirection(-135);
+    tool.forward(10);
+    tool.up();
+    tool.move(75,100);//back to center
+    tool.down();
+    tool.setDirection(180);
+    tool.forward(150);
+    tool.setDirection(45);
+    tool.forward(10);
+    tool.up();
+    tool.move(-75,100);
+    tool.down();
+    tool.setDirection(-45);
+    tool.forward(10);
+    tool.up();
+    tool.move(-75,50);
+    tool.down();
+    tool.setDirection(135);
+    tool.forward(10); //bants
+    tool.up();
+    tool.move(-75,50);
+    tool.down();
+    tool.setDirection(-135);
+    tool.forward(10);
+    tool.up();
+    tool.move(-75,50);
+    tool.down();
+    tool.setDirection(0);
+    tool.forward(150);
+    tool.setDirection(45);
+    tool.forward(10);
+    tool.up();
+    tool.move(75,50);
+    tool.down();
+    tool.setDirection(-45);
+    tool.forward(10);
+    }
+   
+    public void drawPonzo(){
+ 
+        tool.setWidth(5);
+    tool.up();
+    tool.move(-100,-100); // the line part VVVVVVV
+    tool.setDirection(90);
+    tool.down();
+    tool.forward(200);
+    tool.up();
+    tool.move(0,-100);
+    tool.down();
+    tool.setDirection(90);
+    tool.forward(200);
+    tool.up();
+    tool.setWidth(1);
+    tool.move(-500,-400);
+    for(int x=0; x<11; x++){
+    tool.down();
+    tool.setDirection(-30 + x*5);
+    tool.forward(1000);
+    tool.up();
+    int y = -400 + (1*x);
+    tool.move(-500, x);
+    }
+   
+    
+    }
+}
