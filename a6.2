@@ -1,20 +1,51 @@
+import java.lang.Math; // imports the math stuff
 
-public class RegularPolygon
-{
-    private int numSides; // no of sides
-    private double sideLength; // exactly what it is
-    private double myCR; // radius of circumscribed circle
-    private double myIR; //radius of inscribed circle 
-    public RegularPolygon()
-    {        
+public class RegularPolygon {
+    private int sides;
+    private double sideLength,cR,iR; // creates # of sides, circumscribed radus, and inscribed radius
+    // constructor for the regular polygon
+    public RegularPolygon(){
         this(0,0);
+        iR = calcInscR();
+        cR = calcCircR();
     }
-    public RegularPolygon(int sides, double length){
-    sides = numSides;
-    length = sideLength;
+    // constructor for my polygon
+    public RegularPolygon(int sideNum, double length) {
+        sides = sideNum;
+        sideLength = length;
+        iR = calcInscR();  // sets value of inscribed radius to whatever
+        cR = calcCircR(); // sets value to whatever is the actual value
     }
-    private void calcIR(){
-    
+    // calculates the radius of the circumscribed circle
+    private double calcCircR(){
+        return (((1/(Math.sin(Math.PI/sides)))*sideLength))*.5;
     }
-    
+    // calculates the radius of the inscribed circle
+    private double calcInscR(){
+        return (((1/(Math.tan(Math.PI/sides)))*sideLength))*5; // get the inscribed radius
+    }    
+    //returns the vertex angle of the polygon
+    public double getVertexAngle(){
+        return ((((sides-2)*1.0)/sides)*180.0); // gets the vertex
+    }
+        // Returns the perimeter of the polygon(double).     
+    public double getPerimeter(){
+        return ((sides*sideLength)*1.0); // gets the perimeter
+    }    
+    // returns the area of the whole figure
+    public double getArea() {
+        return(((sides*Math.pow(cR,2))*(Math.sin((2*Math.PI)/sides)))/2.0); // returns the area
+    }
+    public double getiR(){
+    return iR;
+    }
+    public double getcR(){
+    return cR;
+    }
+     public double getNumSides(){
+    return sides;
+    }
+     public double getSideLength(){
+    return sideLength;
+    }
 }
