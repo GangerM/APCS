@@ -1,0 +1,14 @@
+//my driver
+
+public class PolygonDriver
+{
+ 
+	public static void main(String[] args) {
+	    
+	    
+		RegularPolygon Polygon = new RegularPolygon(17,18);	//creates new polygon
+		System.out.println("The polygon's are is "+Polygon.getArea()); // gets area of the polygon
+		System.out.println("The polygon's perimeter is "+Polygon.getPerimeter()); // gets perimeter
+		System.out.println("The polygon's vertex angle length is "+Polygon.getVertexAngle()); //gets vertex angle
+}
+}
