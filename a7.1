@@ -11,10 +11,10 @@ public class Receipt
             System.out.print("Enter Item #"+ x +":"); //general output
             cost[x] = in.nextDouble(); //waits for user input
     }   
-    System.out.printf("\n%11s %10s %11s", "Item: ", "Cost: ", "Total: \n"); //Sets the columns    
+    System.out.printf("%-11s %10s %11s", "Item: ", "Cost: ", "Total: \n"); //Sets the columns    
         for(int a=1; a<6; a++) { //makes life easier
             total += cost[a]; //adds the cost of each item to the existing total
-            System.out.printf("%10d %10.2f %10.2f\n", a, cost[a], total); //the values tof item (a), cost[a], and the total
+            System.out.printf("%-10d %10.2f %10.2f\n", a, cost[a], total); //the values tof item (a), cost[a], and the total
         }
     }
 }
