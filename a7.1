@@ -1,0 +1,22 @@
+import java.util.Scanner;
+//Mitul Ganger Period 1
+public class Receipt
+{     
+  public static void main(String[]args){
+    double[] cost = new double[6]; //Makes double "cost" that can have up to 5 values
+    double total = 0; //initial total will be zero, other values added later
+    Scanner in = new Scanner(System.in); // Creates a scanner
+    for(int x=1; x<6 ; x++){ //Inputs item's cost, cost[1] for item 1 etc
+    System.out.print("Enter Item #"+ x +":"); //general output
+    cost[x] = in.nextDouble(); //waits for user input
+    }
+    
+    System.out.printf("\n%11s %10s %11s", "Item: ", "Cost: ", "Total: \n"); //Sets the columns
+    
+    for(int a=1; a<6; a++) { //makes life easier
+     total += (cost[a]); //adds the cost of each item to the existing total
+     System.out.printf("%10d %10.2f %10.2f\n", a, cost[a], total); //the values tof item (a), cost[a], and the total
+        }
+    }
+
+}
