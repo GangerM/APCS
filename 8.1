@@ -1,0 +1,48 @@
+import java.util.Scanner;
+//MITUL GANGER PERIOD 1 :)
+public class CheckMail
+{
+    public static void main(String[] args){
+    double x, y, z, width, height, length, weight, girth; //initializes all the variables I need
+    Scanner in = new Scanner(System.in); // creates a scanner
+    System.out.print("Enter the first dimension of the package: ");
+    x = in.nextDouble();// gets dim 1
+    System.out.print("Enter the second dimension of the package: ");
+    y = in.nextDouble();// gets dim 2
+    System.out.print("Enter the third dimension of the package: ");
+    z = in.nextDouble(); //gets dim 3
+    System.out.print("Enter the weight of the package: ");
+    weight = in.nextDouble(); 
+    /**
+     * Instead of using the conditional statement to find the max, I thought it'd be easier 
+     * to just use 2 if and 1 else statements
+     */
+     if ((x >= y) && (x >= z)){
+         length = x;
+         height = y;
+         width = z;
+        }
+     if ((y >= x) && (y >= z)){
+         length = y;
+         height = x;
+         width = z;
+        }
+     else {
+         length = z;
+         height = x;
+         width = y;
+        }
+    girth = (2*height)+(2*width);
+     if ((girth > 100) && (weight > 70))
+        System.out.println("Package is too large and too heavy");
+     else if (girth > 100)
+        System.out.println("Package is too large");   
+     else if (weight > 70)
+        System.out.println("Package is too heavy");
+     else
+        System.out.println("Package is acceptable");
+        
+    }
+}
+
+
