@@ -33,9 +33,9 @@ public class CheckMail
          width = y;
         }
     girth = (2*height)+(2*width);
-     if ((girth > 100) && (weight > 70))
+     if ((length+girth > 100) && (weight > 70))
         System.out.println("Package is too large and too heavy");
-     else if (girth > 100)
+     else if (length+girth > 100)
         System.out.println("Package is too large");   
      else if (weight > 70)
         System.out.println("Package is too heavy");
