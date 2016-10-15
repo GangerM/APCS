@@ -1,8 +1,8 @@
 public class KochDriver
 {
     public static void main(String[] args){
-    KochCurve curve = new KochCurve();
-    curve.KochCurve(6,300);
+    KochCurve curve = new KochCurve(); //creates new object
+    curve.drawKochCurve(6,300); //calls on KochCurve Method
     }
    
 }
