@@ -9,9 +9,10 @@ public class KochCurve
     }
     
     public void KochCurve(int x, int y){
-    pen.down();
-    if (x < 1) pen.forward(y); //base case
+    if (x < 1)
+    pen.forward(y); //base case
     else{
+    pen.down();
     KochCurve(x-1, y/3); //recursive statement
     pen.turnLeft(60);
     KochCurve(x-1, y/3);
@@ -22,13 +23,15 @@ public class KochCurve
     }
     }
     
-    public void drawKochCurve(int x, int y){ //snoflake drawing method
+    public void drawKochCurve(int x, int y){
     pen.down();
     pen.setDirection(0);
     KochCurve(x,y);
-    pen.setDirection(120);
+    pen.setDirection(-90);
     KochCurve(x,y);
-    pen.setDirection(240);
+    pen.setDirection(180);
+    KochCurve(x,y);
+    pen.setDirection(90);
     KochCurve(x,y);
     }
 }
