@@ -1,1 +1,9 @@
+public class KochDriver
+{
+    public static void main(String[] args){
+    KochCurve curve = new KochCurve();
+    curve.KochCurve(6,300);
+    }
+   
+}
 
