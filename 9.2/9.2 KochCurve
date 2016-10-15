@@ -1,6 +1,6 @@
 import gpdraw.*;
-public class KochCurve{  	
-    private SketchPad paper; //initializes a sketchpad called paper
+public class KochCurve
+{  	private SketchPad paper; //initializes a sketchpad called paper
     private DrawingTool pen; //initializes a drawing tool called pen
 
     public KochCurve(){
@@ -9,9 +9,10 @@ public class KochCurve{
     }
     
     public void KochCurve(int x, int y){
-    if (x < 1) pen.forward(y); //base case
-    else{
     pen.down();
+    if (x < 1)
+    pen.forward(y); //base case
+    else{
     KochCurve(x-1, y/3); //recursive statement
     pen.turnLeft(60);
     KochCurve(x-1, y/3);
@@ -22,6 +23,13 @@ public class KochCurve{
     }
     }
     
-
+    public void drawKochCurve(int x, int y){ //snoflake drawing method
+    pen.down();
+    pen.setDirection(0);
+    KochCurve(x,y);
+    pen.setDirection(120);
+    KochCurve(x,y);
+    pen.setDirection(240);
+    KochCurve(x,y);
+    }
 }
-
