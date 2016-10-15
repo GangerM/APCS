@@ -1,1 +1,36 @@
+import gpdraw.*;
+public class KochCurve
+{  	private SketchPad paper; //initializes a sketchpad called paper
+    private DrawingTool pen; //initializes a drawing tool called pen
+
+    public KochCurve(){
+       paper = new SketchPad(500,500); //creates my paper
+       pen = new DrawingTool(paper); //creates a drawing tool on paper
+    }
+    
+    public void KochCurve(int x, int y){
+    if (x < 1)
+    pen.forward(y); //base case
+    else{
+    pen.down();
+    KochCurve(x-1, y/3); //recursive statement
+    pen.turnLeft(60);
+    KochCurve(x-1, y/3);
+    pen.turnRight(120);
+    KochCurve(x-1, y/3);
+    pen.turnLeft(60);
+    KochCurve(x-1, y/3);
+    }
+    }
+    
+    public void drawKochCurve(int x, int y){
+    pen.down();
+    pen.setDirection(300);
+    KochCurve(x,y);
+    pen.setDirection(180);
+    KochCurve(x,y);
+    pen.setDirection(60);
+    KochCurve(x,y);
+    }
+}
 
