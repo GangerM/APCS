@@ -25,11 +25,11 @@ public class KochCurve
     
     public void drawKochCurve(int x, int y){
     pen.down();
-    pen.setDirection(120);
+    pen.setDirection(0);
     KochCurve(x,y);
     pen.setDirection(240);
     KochCurve(x,y);
-    pen.setDirection(360);
+    pen.setDirection(120);
     KochCurve(x,y);
     }
 }
