@@ -10,8 +10,7 @@ public class KochCurve
     
     public void KochCurve(int x, int y){
     pen.down();
-    if (x < 1)
-    pen.forward(y); //base case
+    if (x < 1) pen.forward(y); //base case
     else{
     KochCurve(x-1, y/3); //recursive statement
     pen.turnLeft(60);
