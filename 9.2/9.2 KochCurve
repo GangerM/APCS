@@ -1,6 +1,6 @@
 import gpdraw.*;
-public class KochCurve
-{  	private SketchPad paper; //initializes a sketchpad called paper
+public class KochCurve{  	
+    private SketchPad paper; //initializes a sketchpad called paper
     private DrawingTool pen; //initializes a drawing tool called pen
 
     public KochCurve(){
