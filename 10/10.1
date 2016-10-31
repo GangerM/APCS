@@ -1,0 +1,17 @@
+
+import java.util.Scanner;
+public class Util
+{ 
+    public static String Reverse(String x) {
+        if (x.length() == 1) return x;
+        else if((x.charAt(x.length()-1) == ',')||(x.charAt(x.length()-1) == '.')||(x.charAt(x.length()-1) == ' ')||(x.charAt(x.length()-1) == '?'))
+            return x.charAt(x.length()-2) + Reverse(x.substring(0,x.length() - 2));
+        else return x.charAt(x.length()-1) + Reverse(x.substring(0,x.length() - 1));   
+    }
+    public static boolean Palidrome(String x) {
+    	x.toLowerCase();
+    	String y = Reverse(x);
+        if (y.equals(x)) return true;
+        else return false;   
+    }
+}
