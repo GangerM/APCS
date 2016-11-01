@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 public class Util
 { 
     public static String Reverse(String x) {
@@ -6,28 +7,36 @@ public class Util
         else if((x.charAt(x.length()-1) == ',')||(x.charAt(x.length()-1) == '.')||(x.charAt(x.length()-1) == ' ')||(x.charAt(x.length()-1) == '?'))
             return x.charAt(x.length()-2) + Reverse(x.substring(0,x.length() - 2));
         else return x.charAt(x.length()-1) + Reverse(x.substring(0,x.length() - 1));   
-    } /**
+    } 
+    /**
      * Input a string with " " signs to see if it's a palindrome
      */
     public static boolean Palidrome(String x) {
-    	x = x.toLowerCase();
-    	String y = Reverse(x); //reverses
+        x = x.toLowerCase();
+        String y = Reverse(x); //reverses
         if (y.equals(Reverse(Reverse(x)))) return true; //is a palindrome
         else return false;   //not a palindrome
     }
-   
     public static String ShortHand(String x) {
        x = x.toLowerCase(); //sets tring to lowercase
-	   if (x.length() == 1) return x;
-	   if (x.charAt(x.length()-2) == 'a' && x.charAt(x.length()-1) == 'n' && x.charAt(x.length()) == 'd') return "&" + ShortHand(x.substring(x.length()-1));
-	   if (x.charAt(0) == 't' && x.charAt(1) == 'o') return "2" + ShortHand(x.substring(2));
-	   if (x.charAt(x.length()-2) == 'y' && x.charAt(x.length()-1) == 'o' && x.charAt(x.length()) == 'u') return "u" + ShortHand(x.substring(x.length()-1));
-	   if (x.charAt(x.length()-2) == 'f' && x.charAt(x.length()-1) == 'o' && x.charAt(x.length()) == 'r') return "4" + ShortHand(x.substring(x.length()-1));
-	   if (((x.indexOf('a'))||(x.indexOf('e'))||(x.indexOf('i'))||(x.indexOf('o'))||(x.indexOf('u') > 0))) return x + ShortHand(x.substring(1));
-	   else return x;
-   }
-   public static String PigLatin(String x){
-       x = x.toLowerCase();
-       
+       if (x.length() == 0 ) return x;
+       if (x.charAt(0) == 'a' && x.charAt(1) == 'n' && x.charAt(x.length()) == 'd') return "&" + ShortHand(x.substring(3));
+       if (x.charAt(0) == 't' && x.charAt(1) == 'o') return "2" + ShortHand(x.substring(2));
+       if ((x.charAt(0) == 'y') && (x.charAt(1) == 'o') && (x.charAt(2) == 'u')) return "u" + ShortHand(x.substring(3));
+       if (x.charAt(0) == 'f' && x.charAt(1) == 'o' && x.charAt(2) == 'r') return "4" + ShortHand(x.substring(3));
+       if (x.charAt(0) == 97 || (x.charAt(0) == 101) || (x.charAt(0) == 105) || (x.charAt(0) == 111) || (x.charAt(0) == 117)) return ShortHand(x.substring(1));
+       else return x.charAt(0) + ShortHand(x.substring(1));
+    }
+    private static String piglatinWork(String x)
+    {
+       if (x.charAt(0) == 'A' || x.charAt(0) == 'a' || x.charAt(0) == 'e' ||x.charAt(0) == 'E' ||x.charAt(0) == 'i' ||x.charAt(0) == 'I' || x.charAt(0) == 'O' ||x.charAt(0) == 'o' ||x.charAt(0) == 'u' ||x.charAt(0)=='U')
+           return x.substring(1) + x.charAt(0) + "yay" + " "; //for words with vowels
+       else return x.substring(1) + x.charAt(0) + "ay" + " "; // returns substring
+    }
+    public static String piglatin(String x)
+    {
+       int index = x.indexOf(' '); //finds the space index for seperate words
+       if (index == -1) return piglatinWork(x);
+       else return piglatinWork(x.substring(0,index)) + piglatin(x.substring(index+1));
     }
 }
