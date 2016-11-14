@@ -1,29 +1,56 @@
-
-public class MultiplicationTable{
+import gpdraw.*;
+public class Pictures{
+    private static DrawingTool pen; // creates a sketch pad and a drawing tool
+    private static SketchPad paper;
     public void printTop(int r){
-    int y = 1+r;
-    int z = 2*r;
+    int y = 1+r, z = 2*r;
     System.out.print("     ");
     for( ; y <= z ; y++)
-    System.out.printf("%5d", (y-r));
-    System.out.println();
-    System.out.println();
+        System.out.printf("%5d", (y-r));
+        System.out.println();
+        System.out.println();
     }
     public void printRow(int r, int c){ // r is the row number, c is the columns and column #
     System.out.printf("%-5d",r);
-    int a = 1+c;
-    int b = 2*c;
+    int a = 1+c, b = 2*c;
+
     for( ; a <= b ; a++)
-    System.out.printf("%5d", (r*(a-c)));
-    System.out.println();
+        System.out.printf("%5d", (r*(a-c)));
+        System.out.println();
     }
     public void printTable(int r, int c){//r equals the number of rows, c is the number of columns
     printTop(r);
-    int a = 1+r;
-    int b = 2*r;
+    int a = 1+r, b = 2*r;
     for( ; a <= b ; a++){
-    printRow(a-r,c);
+        printRow(a-r,c);
     }
     }
-}
+    public void printStars(int n){
+    int c = n+1;
+    for( ; n > 0 ; n--){
+    int d = 3+n;
+        for( ; d > 0; d--)
+				System.out.print(" ");
+        printRow((c-n));
+    }
+    }
+    public void printRow(int n){ // n equals the number of that row
+    for( ; n > 0 ; n--){
+        System.out.print("*");
+    if (n > 1) System.out.print("*");
+    }
+    System.out.println();
+    }
+    public static void sunBurst(){
+        paper = new SketchPad(600,600);
+        pen = new DrawingTool(paper);
+    for ( int n = 360 ; n > 0; n--){
+        pen.up();
+        pen.move(0,0);
+        pen.down();
+        pen.setDirection(n);
+        pen.forward(200);
+    }
+    }
+    }
 
