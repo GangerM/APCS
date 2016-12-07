@@ -22,7 +22,7 @@ public class Account {
 		return p;
 	}
 	public void addPennies(int x){
-		p += x;
+		p += x;//ads pennies
 		if (x < 0)throw new IllegalArgumentException("You can't deposit a negative amount");
 		myBalance+=x;
 	}
@@ -30,7 +30,7 @@ public class Account {
 		return d;
 	}
 	public void addNickels(int x){
-		n += x;
+		n += x; //adds nickels
 		if (x < 0)throw new IllegalArgumentException("You can't deposit a negative amount");
 		myBalance+=(x*5);
 	}
@@ -38,7 +38,7 @@ public class Account {
 		return n;
 	}
 	public void addDimes(int x){
-		d += x;
+		d += x; //adds dimes
 		if (x < 0)throw new IllegalArgumentException("You can't deposit a negative amount");
 		myBalance+=(x*10);
 	}
@@ -46,7 +46,7 @@ public class Account {
 		return q;
 	}
 	public void addQuarters(int x){
-		q += x;
+		q += x;//ads quarters
 		if (x < 0)throw new IllegalArgumentException("You can't deposit a negative amount");
 		myBalance+=(x*25);
 	}
