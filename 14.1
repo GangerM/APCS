@@ -1,0 +1,17 @@
+
+public class keepRollinRollinRolling {
+    
+    public static void diceCount() {
+        int n1,n2,n3,count = 0;
+        boolean x = true;
+        while(x){
+            n1 = (int)((Math.random() * 6)) + 1;
+            n2 = (int)((Math.random() * 6)) + 1;
+            n3 = (int)((Math.random() * 6)) + 1;
+            count++;
+            System.out.println(n1 + " " + n2 + " " + n3);
+            if((n1 != n2) && (n2 != n3) && (n1 != n3))  x = false;     
+        }
+        System.out.println("Count: " + count);
+        }
+    }
