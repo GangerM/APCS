@@ -1,49 +1,64 @@
 import java.awt.geom.*;     // for Point2D.Double
 import java.util.ArrayList; // for ArrayList
 import gpdraw.*;            // for DrawingTool
+
+
+
 public class IrregularPolygon{
    private SketchPad thisismypaper;
    private DrawingTool thisismypencil;
    private ArrayList <Point2D.Double> myPolygon;
    private Point2D.Double pointz;
-   public IrregularPolygon() {
-    myPolygon = new ArrayList <Point2D.Double> ();
-    thisismypaper = new SketchPad(600,600);
-    thisismypencil = new DrawingTool(thisismypaper);
+   
+   public IrregularPolygon() { //constructor
+      myPolygon = new ArrayList <Point2D.Double> ();
+      thisismypaper = new SketchPad(600,600);
+      thisismypencil = new DrawingTool(thisismypaper);
     }
-   public void addPoint(double x, double y){
-    pointz = new Point2D.Double(x,y);
-    myPolygon.add(pointz);
+    
+   public void addPoint(double x, double y){ //method for adding points
+      pointz = new Point2D.Double(x,y);
+      myPolygon.add(pointz);
     } 
+    
    public void draw() { 
     thisismypencil.up();
     for(int x = 0; x < myPolygon.size()-1; x++){
-      Point2D point = myPolygon.get(x);
-      Point2D point2 = myPolygon.get(x+1);
-      thisismypencil.up();
-      thisismypencil.move(point.getX(), point.getY());
-      thisismypencil.down();
-      thisismypencil.move(point2.getX(), point2.getY());
+         Point2D point = myPolygon.get(x);
+         Point2D point2 = myPolygon.get(x+1);
+         thisismypencil.up();
+         thisismypencil.move(point.getX(), point.getY());
+         thisismypencil.down();
+         thisismypencil.move(point2.getX(), point2.getY());
     }
     int x = myPolygon.size();                                                                                                        
     Point2D point0 = myPolygon.get(0);
-    thisismypencil.move(point0.getX(), point0.getY());
+    thisismypencil.move(point0.getX(), point0.getY()); //OG point
     }
 
    public double perimeter() {
    double perimeter = 0;
    double side = 0;
-   for(int x = 0; x < myPolygon.size(); x++){
-      Point2D point = myPolygon.get(x);
-      Point2D point2 = myPolygon.get(x+1);
-      side = Math.sqrt(Math.pow((point2.getX()-point2.getX()),2)+Math.pow((point2.getY()-point.getY()),2));
-      perimeter += side;
+   for(int x = 0; x < myPolygon.size()-1; x++){
+         Point2D point = myPolygon.get(x);
+         Point2D point2 = myPolygon.get(x+1);
+         side = Math.sqrt(Math.pow((point2.getX()-point2.getX()),2)+Math.pow((point2.getY()-point.getY()),2));
+         perimeter += side;
+	      if(x > myPolygon.size() - 1) x = 0; //returns to OG point
     } 
-    return perimeter;
+    return 2*perimeter;
     }
 
-  /* public double area() { 
-    
-  }*/
+  public double area() { 
+		double area = 0;
+		for(int x = 0; x < myPolygon.size() -1; x++){
+			double x1 =  myPolygon.get(x).getX();
+			double y1 =  myPolygon.get(x).getY();
+			double x2 =  myPolygon.get(x+1).getX();
+			double y2 =  myPolygon.get(x+1).getY();
+			area += (0.5)*(x1*y2 - x2*y1);
+			if(x > myPolygon.size()) x = 0; //returns to OG point
+		}
+		return Math.abs(area);
+	}
 }
-
