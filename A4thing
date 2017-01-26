@@ -1,0 +1,33 @@
+  public int getColTotal(int x) {
+	  int total = 0;
+	  for(int z = 0; z < matrix.length;z++){
+		  total += matrix[z][x];
+	  }
+	  return total;
+  }
+  
+    
+    public int getCount(int x) {
+	  int total = 0;
+	  for (int[] rowArray : matrix)
+	  {
+		  for (int item : rowArray)
+		  {
+			  if(item == x) total++;
+		  }
+	  }
+	  return total;
+  }
+
+  
+  public int getLargest() {
+	  int high = 0;
+	  for (int[] rowArray : matrix)
+	  {
+		  for (int item : rowArray)
+		  {
+			  if(item >= high) high = item;
+		  }
+	  }
+	  return high;
+  }
