@@ -4,6 +4,7 @@
     snowman.mirrorArms();
     snowman.explore();
     }
+    
      public void mirrorArms()
   {
     int mirrorPoint = 193;
@@ -30,6 +31,32 @@
         topPixel2 = pixels[row][col];      
         bottomPixel2 = pixels[mirrorPoint2 - row + mirrorPoint2][col];
         bottomPixel2.setColor(topPixel2.getColor());
+      }
+    }
+  }
+  
+  public void testmirrorGull(){
+    Picture gull = new Picture("seagull.jpg");
+    gull.explore();
+    gull.mirrorArms();
+    gull.explore();
+}
+  
+  public void mirrorGull()
+  {
+    int mirrorPoint = 345;
+    Pixel rightPixel = null;
+    Pixel leftPixel = null;
+    Pixel[][] pixels = this.getPixels2D();   
+    
+    // Seagull
+    for (int row = 235; row < 323; row++)
+    {
+      for (int col = 238; col < mirrorPoint; col++)
+      {
+        rightPixel = pixels[row][col];      
+        leftPixel = pixels[row][mirrorPoint - col + mirrorPoint/3];
+        leftPixel.setColor(rightPixel.getColor());
       }
     }
   }
