@@ -1,0 +1,15 @@
+import java.util.*;
+import java.io.File;
+import java.io.IOException;
+public class EraseObject implements Eraser
+{
+    Scanner in = new Scanner();
+    char[20][20] dank;
+  public EraseObject(){
+    File nishnu = new File("digital.txt");
+    while (in.hasNext())
+    {
+        
+    }
+}
+}
