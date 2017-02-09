@@ -55,8 +55,8 @@ public class EraserObject implements Eraser
         }
         if(map[row][col] == '@') map[row][col] = '-'; //gets rid of that one at symbol
         if(col > 0 && map[row][col-1] == '@') erase(row, col-1); // go thru all of these
-        if(col < map[0].length-1 && map[row][col + 1] == '@') erase(row, col + 1);
+        if(col < 19 && map[row][col + 1] == '@') erase(row, col + 1);
         if(row > 0 && map[row-1][col] == '@') erase(row-1, col);
-        if(row < map.length-1 && map[row+1][col] == '@') erase(row+1, col);
+        if(row < 19 && map[row+1][col] == '@') erase(row+1, col);
     }
 }
