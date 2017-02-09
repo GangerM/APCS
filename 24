@@ -60,3 +60,4 @@ public class EraserObject implements Eraser
         if(row < 19 && map[row+1][col] == '@') erase(row+1, col);
     }
 }
+ 
