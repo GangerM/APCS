@@ -45,19 +45,18 @@ public class EraserObject implements Eraser
         System.out.println();
         }
     }
-
+    
+    public boolean bounds(int row, int col){
+    if(col > 0 && row > 0 && col < 21 && row < 21) return true;
+    else return false;
+    }
+    
     public void erase(int row, int col) {
-        col--;
-        row--;
-        if(row > 20 || col > 20){
-        System.out.println("bro this is out of bounds");
-        return;
-        }
-        if(map[row][col] == '@') map[row][col] = '-'; //gets rid of that one at symbol
-        if(col > 0 && map[row][col-1] == '@') erase(row, col-1); // go thru all of these
-        if(col < 19 && map[row][col + 1] == '@') erase(row, col + 1);
-        if(row > 0 && map[row-1][col] == '@') erase(row-1, col);
-        if(row < 19 && map[row+1][col] == '@') erase(row+1, col);
+
+        if(bounds(row,col) && map[row][col] == '@') map[row][col] = '-'; //gets rid of that one at symbol
+        if(bounds(row,col) && map[row][col-1] == '@') erase(row, col-1); // go thru all of these
+        if(bounds(row,col) && map[row][col + 1] == '@') erase(row, col + 1);
+        if(bounds(row,col) && map[row-1][col] == '@') erase(row-1, col);
+        if(bounds(row,col) && map[row+1][col] == '@') erase(row+1, col);
     }
 }
- 
