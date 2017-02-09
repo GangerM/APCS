@@ -47,8 +47,10 @@ public class EraserObject implements Eraser
     }
 
     public void erase(int row, int col) {
-        if(row > 19 || col > 19){
-        System.out.println("bro this is out of bounds, try again");
+        col--;
+        row--;
+        if(row > 20 || col > 20){
+        System.out.println("bro this is out of bounds");
         return;
         }
         if(map[row][col] == '@') map[row][col] = '-'; //gets rid of that one at symbol
@@ -58,4 +60,3 @@ public class EraserObject implements Eraser
         if(row < map.length-1 && map[row+1][col] == '@') erase(row+1, col);
     }
 }
-
