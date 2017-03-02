@@ -1,0 +1,129 @@
+import java.util.*;
+/**
+ * Each player or team will create their own Player, this is only an example....
+ * 
+ * Your code MUST INCLUDE a move method with the following signature. To insure that, you must implement
+ * the Player interface
+ * 
+ */
+public class Mitul implements Player
+{   private static String name = "Mitul";
+    /**
+     * Ok
+     * A bunch of if else statements
+     * driver code to be provided MONDAY, 2/27
+     * 
+     * @return      the move you want to play against opponent
+     *              'r' - rock
+     *              'p' - paper
+     *              's' - scissors
+     *              anything else - forfeit the turn
+     */
+    public String move(List <String> myMoves, List <String> opponentMoves, int myScore, int opponentScore)
+    {   
+        //Starter 4 the first 10
+        if(myScore + opponentScore < 11) {
+            int random = (int)(Math.random() * 3 + 1);
+            if(random == 1) return "p";
+            if(random == 2) return "s";
+            if(random == 3)return "r";    
+        }
+        
+        //Add some randomness cuz y not
+        int lucky = (int)(Math.random() * 4 + 1);
+        int lucky2 = (int)(Math.random() * 2 + 1);
+        if( lucky2 == lucky){
+            int rand = (int)(Math.random() * 3 + 1);
+            if(rand == 1) return "p";
+            if(rand == 2) return "s";
+            if(rand == 3)return "r"; 
+        }
+        
+        //If I'm gettin recked
+        boolean ripganger = false;
+        boolean lockedin = false;
+        int r2total = 0, s2total = 0, p2total = 0;
+        if(((opponentScore + 11 > myScore) || lockedin == true) && ripganger == false){
+            lockedin = true;
+            int lucky3 = (int)(Math.random() * 4 + 1);
+            int lucky4 = (int)(Math.random() * 2 + 1);
+            if( lucky3 == lucky4){
+                int rand0 = (int)(Math.random() * 3 + 1);
+                if(rand0 == 1) return "p";
+                if(rand0 == 2) return "s";
+                if(rand0 == 3)return "r"; 
+            }
+            for(int x = 0; x < opponentMoves.size()-1; x++){
+                if(opponentMoves.get(x) == "s") s2total++;
+                if(opponentMoves.get(x) == "p") p2total++;
+                if(opponentMoves.get(x) == "r") r2total++;
+            }
+            if(opponentScore + 16 > myScore){  //RIP me
+                ripganger = true;
+            }
+            if((s2total > p2total) && (s2total > r2total)) return "r";
+            if((p2total > s2total) && (p2total > r2total)) return "s";
+            if((r2total > p2total) && (r2total > s2total)) return "p";
+            int r4 = (int)(Math.random() * 2 + 1);
+            if((s2total == p2total) && (s2total > r2total)) {
+                if(r4 == 1) return "s";
+                if(r4 == 2) return "r";          
+            }
+            if((s2total > p2total) && (s2total == r2total)) {
+                if(r4 == 1) return "r";
+                if(r4 == 2) return "p";          
+            }
+            if((p2total > s2total) && (p2total == r2total)){
+                if(r4 == 1) return "p";
+                if(r4 == 2) return "s";          
+            }
+            else{
+                int rr = (int)(Math.random() * 3 + 1);
+                if(rr == 1) return "p";
+                if(rr == 2) return "s";
+                if(rr == 3)return "r";   
+            }
+        }
+        
+        //Random (final lock)
+        if(ripganger = true){
+            int random = (int)(Math.random() * 3 + 1);
+            if(random == 1) return "p";
+            if(random == 2) return "s";
+            if(random == 3)return "r";
+        }
+        
+        //Normal strategy
+        int rtotal = 0, stotal = 0, ptotal = 0;
+        for(int x = 0; x < myMoves.size()-1; x++){
+            if(myMoves.get(x) == "s") stotal++;
+            if(myMoves.get(x) == "p") ptotal++;
+            if(myMoves.get(x) == "r") rtotal++;
+        }
+        if((stotal > ptotal) && (stotal > rtotal)) return "p";
+        if((ptotal > stotal) && (ptotal > rtotal)) return "r";
+        if((rtotal > ptotal) && (rtotal > stotal)) return "s";
+        if((stotal == ptotal) && (stotal > rtotal)) {
+            int r1 = (int)(Math.random() * 2 + 1);
+            if(r1 == 1) return "p";
+            if(r1 == 2) return "r";          
+        }
+        if((stotal > ptotal) && (stotal == rtotal)) {
+            int r2 = (int)(Math.random() * 2 + 1);
+            if(r2 == 1) return "p";
+            if(r2 == 2) return "s";          
+        }
+        if((ptotal > stotal) && (ptotal == rtotal)){
+            int r3 = (int)(Math.random() * 2 + 1);
+            if(r3 == 1) return "r";
+            if(r3 == 2) return "s";          
+        }
+        
+        return "s"; //scissors cuz y not
+    }
+    
+    public String getName()
+    {
+        return name;
+    }
+}
