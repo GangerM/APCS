@@ -1,0 +1,77 @@
+import java.util.*;
+
+public class Merge{
+    
+  public void merge (ArrayList <Comparable> a, ArrayList <Comparable> b, ArrayList <Comparable> c){
+        int indexA = 0, indexB = 0;
+	  boolean isDoneA = false, isDoneB = false;
+	  
+	  do{
+		  if(indexA >= a.size()) {
+			  isDoneA = true;
+		  }
+		  
+		  if(indexB >= b.size()) {
+			  isDoneB = true;
+		  }
+		  
+		  if(!isDoneA && !isDoneB) {
+			  if(a.get(indexA) < b.get(indexB)) {
+				  c.add(a.get(indexA));
+				  indexA++;
+			  }
+			  else{
+				  c.add(b.get(indexB));
+				  indexB++;
+			  }
+		  }
+	  }while(!isDoneA && !isDoneB);
+	  
+	  if(isDoneA) {
+		  for(int x = indexB; x < b.size(); x++) {
+			c.add(b.get(x));  
+		  }  
+	  }
+	  else {
+		  for(int x = indexA; x < a.size(); x++) {
+				c.add(a.get(x));  
+		  }
+	  }
+	  
+	  
+  }
+
+  public ArrayList <Comparable> fillArray(){
+    Scanner console = new Scanner(System.in);
+
+    System.out.println();
+    System.out.print("How many numbers do you wish to generate? ");
+    int numInts = console.nextInt();
+
+    ArrayList <Comparable> temp = new ArrayList <Comparable> ();
+
+    System.out.print("Largest integer to generate? ");
+    int largestInt = console.nextInt();
+
+    Random randGen = new Random();
+
+    for (int loop = 0; loop < numInts; loop++){
+      temp.add(randGen.nextInt(largestInt) + 1);
+    }
+
+    return temp;
+  }
+
+  public void screenOutput(ArrayList <Comparable> temp){
+    for (int loop = 0; loop < temp.size(); loop++){
+      if (loop % 15 == 0){
+        System.out.println();
+      }
+      System.out.printf("%5d",temp.get(loop));
+    }
+    System.out.println();
+  }
+
+  
+}
+
