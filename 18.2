@@ -11,7 +11,6 @@ public class RecursiveMergeSort {
 				a.set(first, a.get(last));
 				a.set(last, temp1);
 			}
-			steps+=2;
 		}
 		else {
 			int midpoint = (last+first)/2;
@@ -29,14 +28,11 @@ public class RecursiveMergeSort {
 		boolean isDoneA = false, isDoneB = false;
 		  do{
 			  if(indexA > leftSize) isDoneA = true;
-			  steps++;
 			  if(indexB > rightSize+midpoint) isDoneB = true;
-			  steps++;
 			  if(!isDoneA && !isDoneB) {
 				  if(a.get(indexA) < a.get(indexB)) {
 					  temp.add(a.get(indexA));
 					  indexA++;
-					  steps++;
 				  }
 				  else{
 					  temp.add(a.get(indexB));
@@ -45,21 +41,8 @@ public class RecursiveMergeSort {
 			  }
 		  }while(!isDoneA && !isDoneB);
 		  
-		  if(isDoneA) {
-			  for(int x = indexB; x < rightSize; x++) {
-				temp.add(a.get(x));  
-				steps++;
-			  }  
-		  }
-		  else {
-			  for(int x = indexA; x < leftSize; x++) {
-					temp.add(a.get(x));  
-					steps++;
-			  }
-		  }
-		  for(int x = 0; x < temp.size(); x++) {
-			  a.set(first+x, temp.get(x));
-			  steps+=2;
-		  }  
+		  if(isDoneA) for(int x = indexB; x < rightSize; x++) temp.add(a.get(x));  
+		  else for(int x = indexA; x < leftSize; x++) temp.add(a.get(x));  
+	          for(int x = 0; x < temp.size(); x++)  a.set(first+x, temp.get(x));  
 	}
 }
