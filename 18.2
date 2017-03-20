@@ -1,25 +1,103 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+public class RecursiveMergeSort {
+	int steps = 0;
+	public void mergeSort(ArrayList <Integer> a, int first, int last) {
+		if(last-first == 0) return;
+		else if(last - first == 1) {
+			if (a.get(first) > a.get(last)) {
+				steps+=4;
+				Integer temp1 = a.get(first);
+				a.set(first, a.get(last));
+				a.set(last, temp1);
+			}
+			steps+=2;
+		}
+		else {
+			int midpoint = (last+first)/2;
+			mergeSort(a,first,midpoint);
+			mergeSort(a,midpoint+1,last);
+			merge(a,first,midpoint,last);
+		}	
+	}
+	
+	
+	public void merge (ArrayList <Integer> a, int first, int midpoint, int last){
+		int indexA = first;
+        indexB = midpoint+1;
+        leftSize = midpoint-first+1;
+        rightSize = last-midpoint;
+		ArrayList <Integer> temp = new ArrayList <Integer> ();
+		boolean isDoneA = false, isDoneB = false;
+		  do{
+			  if(indexA > leftSize) isDoneA = true;
+			  steps++;
+			  if(indexB > rightSize+midpoint) isDoneB = true;
+			  steps++;
+			  if(!isDoneA && !isDoneB) {
+				  if(a.get(indexA) < a.get(indexB)) {
+					  temp.add(a.get(indexA));
+					  indexA++;
+					  steps++;
+				  }
+				  else{
+					  temp.add(a.get(indexB));
+					  indexB++;
+				  }
+			  }
+		  }while(!isDoneA && !isDoneB);
+		  
+		  if(isDoneA) {
+			  for(int x = indexB; x < rightSize; x++) {
+				temp.add(a.get(x));  
+				steps++;
+			  }  
+		  }
+		  else {
+			  for(int x = indexA; x < leftSize; x++) {
+					temp.add(a.get(x));  
+					steps++;
+			  }
+		  }
+		  for(int x = 0; x < temp.size(); x++) {
+			  a.set(first+x, temp.get(x));
+			  steps+=2;
+		  }
+		  
+	}
 
-public class RecursiveMergeSort
-{
-    public void merge (ArrayList <Integer> a, int first, int last){
-        
-        if( first - last ==0) return;
-        else if (last - first ==1){
-            if(a.get(first) > a.get(last)){
-            Integer temp1 = first;
-            Integer temp2 = last;
-            
-                
-                
-            }
-        }
-        ArrayList<Integer> L = new ArrayList<Integer>();
-        
-        
-        for( int x = 0; x < midval; x++){
-            L.set(x, a.get(x));
-        }
-        
-        
-    }
+	  public ArrayList <Integer> fillArray(){
+	    Scanner console = new Scanner(System.in);
+
+	    System.out.println();
+	    System.out.print("How many numbers do you wish to generate? ");
+	    int numInts = console.nextInt();
+
+	    ArrayList <Integer> temp = new ArrayList <Integer> ();
+
+	    System.out.print("Largest integer to generate? ");
+	    int largestInt = console.nextInt();
+
+	    Random randGen = new Random();
+
+	    for (int loop = 0; loop < numInts; loop++){
+	      temp.add(randGen.nextInt(largestInt) + 1);
+	    }
+
+	    return temp;
+	  }
+
+	  /**
+	   *  Prints out the contents of the array in tabular form, 20 columns
+	   */
+	  public void screenOutput(ArrayList <Integer> temp){
+	    for (int loop = 0; loop < temp.size(); loop++){
+	      if (loop % 15 == 0){
+	        System.out.println();
+	      }
+	      System.out.printf("%5d",temp.get(loop));
+	    }
+	    System.out.println();
+	  }
+
 }
