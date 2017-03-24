@@ -1,0 +1,161 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
+public class CountWords{
+    private Scanner in;
+    private List<Words> word;
+    private List<Words> strings;
+    private static int search = 0;
+    
+    public CountWords(String path){
+        word = new ArrayList<Words>();
+        strings = new ArrayList<Words>();
+        try {
+            in = new Scanner(new File("lincoln.txt"));
+            while(in.hasNext())add(toBasicText(in.next().toLowerCase()));
+        } catch (FileNotFoundException e) {
+             System.out.println(e.getMessage()); //catchs the exception and stuff
+        }
+        recursiveMerge(0, word.size()-1);
+        recursiveStringMerge(0, strings.size() - 1);
+        printresults();
+    }
+    
+    public List<Words> CountList(){
+        return word;
+    }
+    
+    public List<Words> AlphabeticalList(){
+        return strings;
+    }   
+    
+    public String simplify(String a) {
+        if(a.length() == 0) return "";
+        if(a.charAt(0) < 97 || a.charAt(0) > 122) {
+            if(a.charAt(0) == 45) {
+                return a.charAt(0) + simplify(a.substring(1));
+            }
+            return simplify(a.substring(1));
+        }
+        else return a.charAt(0) + simplify(a.substring(1));
+    }
+    
+    private void printresults() {
+        int sum = 0;
+        for(int x = 0; x < word.size(); x++) {
+            sum+=word.get(x).getCount();
+        }
+        System.out.println("30 Most Used Words: \n");
+        System.out.println(" # n Word");
+        for(int x = 0; x < 30; x++) {
+            System.out.printf("%2d" , x+1);
+            System.out.printf("%5d", word.get(x).getCount());
+            System.out.printf("%15s", word.get(x).getName() + "\n");
+        }
+        System.out.println("\nNumber of words used = " + word.size());
+        System.out.println("Total # of words = " + sum + "\n");
+    }
+    
+    public void binarySearch(String value, int min, int max) {
+        if (min > max) {
+            System.out.println("No, the word '"+ value + "' does not exist in the list");
+            System.out.println("It took up"+ search + " searches");
+            search = 0;
+            return;
+        }
+        int mid = (max + min)/ 2;
+        if (strings.get(mid).getName().equals(value)) {
+            System.out.println("Yes, the word '" + value + "' exists at AI:" + mid + ", TI: " + strings.get(mid).getIndex());
+            System.out.println("It took "+ search + " searches to find '" + value + "'");  
+            search = 0;
+            return;
+        } else if(strings.get(mid).getName().compareTo(value) > 0) {
+            search++;
+            binarySearch(value, min, mid-1);
+        } else {
+            search++;
+            binarySearch(value, mid + 1, max);
+        }
+    } 
+    
+    private void add(String s) {
+        boolean isInList = false;
+        for(int x = 0; x < word.size(); x++){
+            if(!s.equals("‐") && s.equals(word.get(x).getName())){
+                word.get(x).incrementCount();
+                isInList = true;
+            }
+        }
+        if(!s.equals("‐") && !isInList){
+            Words q = new Words(s);
+            word.add(q);
+            q.setIndex(word.size()-1);
+            strings.add(q);
+        }
+    }
+
+    public void recursiveStringMerge(int first, int last){
+        if(last-first == 0) return;
+        else if(last - first == 1) {
+            if (strings.get(first).getName().compareTo(strings.get(last).getName()) > 0) {
+                Words temp1 = strings.get(first);
+                strings.set(first, strings.get(last));
+                strings.set(last, temp1);
+            }
+        }
+        else {
+            int mid = (last+first)/2;
+            recursiveStringMerge(first,mid);
+            recursiveStringMerge(mid+1,last);
+            mergeStringSort(first,mid,last);
+        }
+    }
+    
+    public void mergeStringSort(int first, int mid, int last){
+        int aPtr = first, bPtr = mid+1, total = last-first+1, loop;
+        boolean doneA = false, doneB = false;
+        ArrayList<Words> temp = new ArrayList<Words>();
+        for(loop = 1; loop <= total; loop++){
+            if(doneA) temp.add(strings.get(bPtr++));
+            else if(doneB) temp.add(strings.get(aPtr++));
+            else if(strings.get(aPtr).getName().compareTo(strings.get(bPtr).getName()) < 0)temp.add(strings.get(aPtr++));
+            else temp.add(strings.get(bPtr++));
+            if(aPtr > mid) doneA = true;
+            if(bPtr > last) doneB = true;
+        } 
+        for(loop = first; loop <= last; loop++)strings.set(loop, temp.get(loop-first));
+    }
+    
+    public void recursiveMerge(int first, int last){
+
+        if(last-first == 0) return;
+        else if(last - first == 1) {           
+            if (word.get(first).getCount() < word.get(last).getCount()) {
+                Words temp1 = word.get(first);
+                word.set(first, word.get(last));
+                word.set(last, temp1);
+            }
+        }
+        else {
+            int mid = (last+first)/2;
+            recursiveMerge(first,mid);
+            recursiveMerge(mid+1,last);
+            mergeSort(first,mid,last);
+        }
+    }
+    
+    public void mergeSort(int first, int mid, int last){
+        int aPtr = first, bPtr = mid+1, total = last-first+1, loop;
+        boolean doneA = false, doneB = false;
+        ArrayList<Words> temp = new ArrayList<Words>();
+        for(loop = 1; loop <= total; loop++){
+            if(doneA)temp.add(word.get(bPtr++));      
+            else if(doneB) temp.add(word.get(aPtr++));
+            else if(word.get(aPtr).getCount() > word.get(bPtr).getCount()){temp.add(word.get(aPtr++));
+            else  temp.add(word.get(bPtr++));
+            if(aPtr > mid) doneA = true;
+            if(bPtr > last) doneB = true;
+        }
+        for(loop = first; loop <= last; loop++)word.set(loop, temp.get(loop‐first));
+        }
+    }
