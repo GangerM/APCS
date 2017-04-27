@@ -1,0 +1,35 @@
+public class Digit
+{
+    private int base;
+    private double value;
+
+    
+    public Digit()
+    {
+       base = 10;
+       value = 0;
+    }
+     
+    //accepts a decimal value and a base
+    public Digit(int b, double v)
+    {
+       base = b;
+       value = v;
+    }
+    
+    public boolean increment(){
+        
+         if (value % base !=  0 && value > base){
+            return true;
+         }
+          return false;
+        }
+        
+        
+       
+    
+    public String toString ()
+    {
+        return "" + value/base;
+    }
+}
