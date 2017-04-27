@@ -1,22 +1,33 @@
-
 public class Chick implements Animal{
     private String myType;
-    private String mySound;
+    private String mySound1;
+    private boolean flag;
+    private String mySound2;
     
-    public Chick()
-    {
+    public Chick(){
         myType = "chick";
-        mySound = "cockadoodledoo";
-    }
-
-    public String getSound()
-    {
-        return mySound; 
+        mySound1 = "cluck";
     }
     
-    public String getType()
-    {
-        return myType; 
+    public Chick(boolean two){
+        myType = "chick";
+        mySound1 = "cluck";
+        mySound2 = "cheep";
+        flag = two;
     }
+    
+      public String getSound(){
+      int rand = (int)(Math.random()*2);
+      
+      if(twoSounds && rand==1){
+        return mySound2;
+        
+        }else{
+        return mySound1;
+     }
+  }
 
-}
+   public String getType(){
+     return myType; 
+    }
+  }
