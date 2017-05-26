@@ -9,39 +9,52 @@ import robocode.*;
  */
 public class Ganger extends Robot
 {
+int count = 0; 
+
+	double gunTurnAmt; // How much to turn our gun when searching
+	String trackName; 
 	int dist = 50;
 public void run() {
+		trackName = null; // Initialize to not tracking anyone
+		setAdjustGunForRobotTurn(true); // Keep the gun still when we turn
+		gunTurnAmt = 10; // Initialize gunTurn to 10
 
+		// Loop forever
 		while (true) {
-			ahead(100); // Move ahead 100
-			turnGunRight(360); // Spin gun around
-			back(100); // Move back 100
-			turnGunRight(360); // Spin gun around
+			// turn the Gun (looks for enemy)
+			turnGunRight(gunTurnAmt);
+			// Keep track of how long we've been looking
+			count++;
+			// If we've haven't seen our target for 2 turns, look left
+			if (count > 2) {
+				gunTurnAmt = -10;
+			}
+			// If we still haven't seen our target for 5 turns, look right
+			if (count > 5) {
+				gunTurnAmt = 10;
+			}
+			// If we *still* haven't seen our target after 10 turns, find another target
+			if (count > 11) {
+				trackName = null;
+			}
 		}
-	}
+}
 	/**
 	 * onScannedRobot: What to do when you see another robot
 	 */
 	public void onScannedRobot(ScannedRobotEvent e) {
-		// If the other robot is close by, and we have plenty of life,
-		// fire hard!
 		if (e.getDistance() < 50 && getEnergy() > 50) {
-			fire(10);
+			fire(20);
 		} // otherwise, fire 1.
 		else {
 			fire(10);
 		}
-		// Call scan again, before we turn the gun
 		scan();
 	}
 
 
-	/**
-	 * onHitByBullet: What to do when you're hit by a bullet
-	 */
 	public void onHitByBullet(HitByBulletEvent e) {
 		turnRight(5);
-
 		ahead(dist);
 		dist *= -1;
 		scan();
@@ -49,13 +62,18 @@ public void run() {
 	public void onHitRobot(HitRobotEvent e) {
 		double turnGunAmt = 5;
 		turnGunRight(turnGunAmt);
-		fire(3);
+		fire(10);
 	}
 	/**
 	 * onHitWall: What to do when you hit a wall
 	 */
 	public void onHitWall(HitWallEvent e) {
-		// Replace the next line with any behavior you would like
-		back(20);
-	}	
+		int x = (int)(Math.random()*1)+1;
+		if(x == 1) back(20);
+		else ahead(20);
+	}
+	public void onBulletHitBullet( BulletHitBulletEvent e){
+	fire(1);
+	fire(9);
+	}
 }
