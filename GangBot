@@ -1,0 +1,61 @@
+package ganger;
+import robocode.*;
+//import java.awt.Color;
+
+// API help : http://robocode.sourceforge.net/docs/robocode/robocode/Robot.html
+
+/**
+ * Ganger - a robot by (your name here)
+ */
+public class Ganger extends Robot
+{
+	int dist = 50;
+public void run() {
+
+		while (true) {
+			ahead(100); // Move ahead 100
+			turnGunRight(360); // Spin gun around
+			back(100); // Move back 100
+			turnGunRight(360); // Spin gun around
+		}
+	}
+	/**
+	 * onScannedRobot: What to do when you see another robot
+	 */
+	public void onScannedRobot(ScannedRobotEvent e) {
+		// If the other robot is close by, and we have plenty of life,
+		// fire hard!
+		if (e.getDistance() < 50 && getEnergy() > 50) {
+			fire(10);
+		} // otherwise, fire 1.
+		else {
+			fire(10);
+		}
+		// Call scan again, before we turn the gun
+		scan();
+	}
+
+
+	/**
+	 * onHitByBullet: What to do when you're hit by a bullet
+	 */
+	public void onHitByBullet(HitByBulletEvent e) {
+		turnRight(5);
+
+		ahead(dist);
+		dist *= -1;
+		scan();
+	}
+	public void onHitRobot(HitRobotEvent e) {
+		double turnGunAmt = 5;
+		turnGunRight(turnGunAmt);
+		fire(3);
+	}
+	/**
+	 * onHitWall: What to do when you hit a wall
+	 */
+	public void onHitWall(HitWallEvent e) {
+		// Replace the next line with any behavior you would like
+		back(20);
+	}	
+}
