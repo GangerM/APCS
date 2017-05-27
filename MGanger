@@ -5,15 +5,15 @@ import robocode.*;
 // API help : http://robocode.sourceforge.net/docs/robocode/robocode/Robot.html
 
 /**
- * Ganger - a robot by (your name here)
+ * Ganger - a robot by Mitul
  */
 public class Ganger extends Robot
 {
 int count = 0; 
 
-	double gunTurnAmt; // How much to turn our gun when searching
-	String trackName; 
-	int dist = 50;
+	double gunTurnAmt; // How much to turn gun when searching
+	String trackName; // if there is a tracked enemy or not
+	int dist = 50; //initial distance for traveling
 public void run() {
 		trackName = null; // Initialize to not tracking anyone
 		setAdjustGunForRobotTurn(true); // Keep the gun still when we turn
@@ -45,7 +45,7 @@ public void run() {
 	public void onScannedRobot(ScannedRobotEvent e) {
 		if (e.getDistance() < 50 && getEnergy() > 50) {
 			fire(20);
-		} // otherwise, fire 1.
+		} // otherwise, fire 10
 		else {
 			fire(10);
 		}
@@ -53,7 +53,7 @@ public void run() {
 	}
 
 
-	public void onHitByBullet(HitByBulletEvent e) {
+	public void onHitByBullet(HitByBulletEvent e) {//what to do when hit by a bullet
 		turnRight(5);
 		ahead(dist);
 		dist *= -1;
@@ -68,11 +68,11 @@ public void run() {
 	 * onHitWall: What to do when you hit a wall
 	 */
 	public void onHitWall(HitWallEvent e) {
-		int x = (int)(Math.random()*1)+1;
+		int x = (int)(Math.random()*1)+1;//math rand so that if you are facing a certain way you can always get out of the wall
 		if(x == 1) back(20);
 		else ahead(20);
 	}
-	public void onBulletHitBullet( BulletHitBulletEvent e){
+	public void onBulletHitBullet( BulletHitBulletEvent e){// if a bullet hits the enemy's bullets, fire 1 to break the first and 9 to attack the enemy
 	fire(1);
 	fire(9);
 	}
