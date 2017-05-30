@@ -54,23 +54,23 @@ public void run() {
 
 
 	public void onHitByBullet(HitByBulletEvent e) {//what to do when hit by a bullet
-		turnRight(5);
-		ahead(dist);
+		turnRight(80);
+		ahead(200);
 		dist *= -1;
 		scan();
 	}
 	public void onHitRobot(HitRobotEvent e) {
 		double turnGunAmt = 5;
 		turnGunRight(turnGunAmt);
-		fire(10);
+		fire(3);
 	}
 	/**
 	 * onHitWall: What to do when you hit a wall
 	 */
 	public void onHitWall(HitWallEvent e) {
 		int x = (int)(Math.random()*1)+1;//math rand so that if you are facing a certain way you can always get out of the wall
-		if(x == 1) back(20);
-		else ahead(20);
+		if(x == 1) back(150);
+		else ahead(150);
 	}
 	public void onBulletHitBullet( BulletHitBulletEvent e){// if a bullet hits the enemy's bullets, fire 1 to break the first and 9 to attack the enemy
 	fire(1);
